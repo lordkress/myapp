@@ -16,6 +16,11 @@ pipeline {
      # Use service account that can deploy to all namespaces
      serviceAccountName: cd-jenkins
     containers:
+    - name: gcloud
+      image: gcr.io/cloud-builders/gcloud
+      command:
+    - cat
+    tty: true
     - name: cube
       image: gcr.io/cloud-builders/kubectl
       command:
@@ -28,8 +33,8 @@ pipeline {
 stages {
  stage ('Build image') {
    steps {
-      container('cube') {
-         sh("docker build -t ${imageTag} .")
+      container('gcloud') {
+         sh("gcloud docker build -t ${imageTag} .")
          }
        }
     }
@@ -45,9 +50,11 @@ stages {
 	// Roll out to production
 	// Change deployed image in canary to the one we just built
 	//sh("sed -i.bak 's#gcr.io/cloud-solutions-images/gceme:1.0.0#${imageTag}#' ./k8s/production/*.yaml")
-    sh("kubectl --namespace=production apply -f k8s/services/")
-    sh("kubectl --namespace=production apply -f k8s/production/")
-    sh("echo http://`kubectl --namespace=production get service/${appName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${appName}")}
-      }
+	container('cube') {
+       sh("kubectl --namespace=production apply -f k8s/services/")
+       sh("kubectl --namespace=production apply -f k8s/production/")
+       sh("echo http://`kubectl --namespace=production get service/${appName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${appName}")}
+         }
+       }
     }
 }

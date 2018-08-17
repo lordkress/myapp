@@ -4,7 +4,7 @@ def imageTag = "https://github.com/lordkress/${appName}:${env.BRANCH_NAME}.${env
 pipeline {
     agent {
      kubernetes {
-      label 'myapp'
+      label 'mykube'
       defaultContainer 'jnlp'
       yaml """
       apiVersion: v1
@@ -28,8 +28,10 @@ pipeline {
 stages {
  stage ('Build image') {
    steps {
-      sh("docker build -t ${imageTag} .")
+      container('mykube') {
+         sh("docker build -t ${imageTag} .")
          }
+       }
     }
 
  stage ('Push image to registry'){

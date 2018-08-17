@@ -3,7 +3,6 @@ def imageTag = "https://github.com/lordkress/${appName}:${env.BRANCH_NAME}.${env
 
 pipeline {
     agent {
-        docker { image 'node:7-alpine' }
 	kubernetes {
       label 'sample-app'
       defaultContainer 'jnlp'

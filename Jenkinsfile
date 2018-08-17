@@ -4,7 +4,7 @@ def imageTag = "https://github.com/lordkress/${appName}:${env.BRANCH_NAME}.${env
 pipeline {
     agent {
 	kubernetes {
-      label 'my-app'
+      label 'myapp'
       defaultContainer 'jnlp'
       yaml """
 	  apiVersion: v1

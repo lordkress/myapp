@@ -16,7 +16,7 @@ pipeline {
      # Use service account that can deploy to all namespaces
      serviceAccountName: cd-jenkins
     containers:
-    - name: kubectl
+    - name: cube
       image: gcr.io/cloud-builders/kubectl
       command:
     - cat
@@ -28,7 +28,7 @@ pipeline {
 stages {
  stage ('Build image') {
    steps {
-      container('kubectl') {
+      container('cube') {
          sh("docker build -t ${imageTag} .")
          }
        }

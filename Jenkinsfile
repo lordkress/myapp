@@ -17,7 +17,7 @@ pipeline {
      serviceAccountName: cd-jenkins
     containers:
     - name: kubectl
-     image: gcr.io/cloud-builders/kubectl
+      image: gcr.io/cloud-builders/kubectl
       command:
     - cat
     tty: true
@@ -28,7 +28,7 @@ pipeline {
 stages {
  stage ('Build image') {
    steps {
-      container('mykube') {
+      container('kubectl') {
          sh("docker build -t ${imageTag} .")
          }
        }

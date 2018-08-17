@@ -6,6 +6,7 @@ pipeline {
         docker { image 'node:7-alpine' }
     }
 	
+	stages {
 	stage ('Build image') {
 	sh("docker build -t ${imageTag} .")}
 
@@ -21,5 +22,5 @@ pipeline {
 	sh("kubectl --namespace=production apply -f k8s/services/")
 	sh("kubectl --namespace=production apply -f k8s/production/")
 	sh("echo http://`kubectl --namespace=production get service/${appName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${appName}")}
-	
+	}	
 }

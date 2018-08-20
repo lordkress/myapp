@@ -1,4 +1,7 @@
 def label = "mypod-${UUID.randomUUID().toString()}"
+def imageTag = "https://github.com/lordkress/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+def appName = 'myapp'
+
 podTemplate(label: label, containers: [
     containerTemplate(name: 'gcloud', image: 'gcr.io/cloud-builders/gcloud:latest', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'kube', image: 'gcr.io/cloud-builders/kubectl:latest', ttyEnabled: true, command: 'cat')

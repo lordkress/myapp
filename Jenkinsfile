@@ -12,7 +12,7 @@ podTemplate(label: label, containers: [
       node(label) {
             stage ('Build image') {
                 container('gcloud') {
-                    sh("gcloud docker build -t ${imageTag} .")
+					sh("gcloud builds submit -t ${imageTag} .")
                 }
             }
 
@@ -23,7 +23,7 @@ podTemplate(label: label, containers: [
             }
 	
             stage ('Deploy Application') {
-                container('cube') {
+                container('kube') {
                     sh("kubectl --namespace=production apply -f k8s/services/")
                     sh("kubectl --namespace=production apply -f k8s/production/")
                     sh("echo http://`kubectl --namespace=production get service/${appName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${appName}")

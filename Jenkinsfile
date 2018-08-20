@@ -1,7 +1,7 @@
 def label = "mypod-${UUID.randomUUID().toString()}"
 podTemplate(label: label, containers: [
-    containerTemplate(name: 'gcloud', image: gcr.io/cloud-builders/gcloud:latest, ttyEnabled: true, command: 'cat'),
-    containerTemplate(name: 'kube', image: gcr.io/cloud-builders/kubectl:latest, ttyEnabled: true, command: 'cat')
+    containerTemplate(name: 'gcloud', image: 'gcr.io/cloud-builders/gcloud:latest', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'kube', image: 'gcr.io/cloud-builders/kubectl:latest', ttyEnabled: true, command: 'cat')
   ]) 
   
 {

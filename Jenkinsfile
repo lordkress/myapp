@@ -3,7 +3,7 @@ def appName = 'myapp'
 def imageTag = "https://github.com/lordkress/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
 podTemplate(label: label, containers: [
-    containerTemplate(name: 'gcloud', image: 'gcr.io/cloud-builders/gcloud:latest', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'docker', image: 'gcr.io/cloud-builders/docker:latest', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'kube', image: 'gcr.io/cloud-builders/kubectl:latest', ttyEnabled: true, command: 'cat')
   ]) 
   
@@ -11,8 +11,8 @@ podTemplate(label: label, containers: [
 
       node(label) {
             stage ('Build image') {
-                container('gcloud') {
-					sh("gcloud builds submit -t ${imageTag} .")
+                container('docker') {
+					sh("docker build-t ${imageTag} .")
                 }
             }
 

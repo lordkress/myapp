@@ -4,7 +4,7 @@ def imageTag = "https://github.com/lordkress/${appName}:${env.BRANCH_NAME}.${env
 pipeline {
     agent {
      kubernetes {
-      label 'mykube'
+      label 'mypod'
       defaultContainer 'jnlp'
       yaml """
       apiVersion: v1
@@ -19,13 +19,13 @@ pipeline {
     - name: gcloud
       image: gcr.io/cloud-builders/gcloud
       command:
-    - cat
-    tty: true
+      - cat
+      tty: true
     - name: cube
       image: gcr.io/cloud-builders/kubectl
       command:
-    - cat
-    tty: true
+      - cat
+      tty: true
 """
  }
 }

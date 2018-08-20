@@ -12,7 +12,7 @@ podTemplate(label: label, containers: [
       node(label) {
             stage ('Build image') {
                 container('docker') {
-					sh("docker build -t ${appName} .")
+					sh("docker build -t ${appName}")
                 }
             }
 

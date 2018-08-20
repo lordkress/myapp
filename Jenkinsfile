@@ -4,10 +4,9 @@ podTemplate(label: label, containers: [
     containerTemplate(name: 'kube', image: 'gcr.io/cloud-builders/kubectl:latest', ttyEnabled: true, command: 'cat')
   ]) 
   
-{
+   {
 
       node(label) {
-	    stages {
             stage ('Build image') {
                 steps {
                     container('gcloud') {
@@ -33,6 +32,6 @@ podTemplate(label: label, containers: [
 		            }
                 }
             }
+        
         }
     }
-}

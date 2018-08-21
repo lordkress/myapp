@@ -8,10 +8,11 @@ pipeline {
   agent none
   stages {
     stage('Docker Build') {
-      agent any
-      steps {
-        sh 'docker build -t ${appName} .'
-      }
+      agent {
+	    Docker {
+            steps {
+              sh 'docker build -t ${appName} .'
+        }    }
     }
   }
 }

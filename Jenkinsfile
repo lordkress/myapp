@@ -14,7 +14,7 @@ pipeline {
 	            }
             }
 			  steps {
-                      sh 'docker build -t ${appName} .'
+                     sh 'echo Hello World!'
                     }
         }
     }

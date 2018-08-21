@@ -10,11 +10,12 @@ pipeline {
        stage('Docker Build') {
          agent {
 	            docker {
-                   steps {
-                      sh 'docker build -t ${appName} .'
-                    }    
+                    image 'docker:latest'                       
 	            }
             }
+			  steps {
+                      sh 'docker build -t ${appName} .'
+                    }
         }
     }
 }

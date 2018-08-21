@@ -12,7 +12,8 @@ pipeline {
 	    Docker {
             steps {
               sh 'docker build -t ${appName} .'
-        }    }
+            }   
+	    }
     }
   }
 }

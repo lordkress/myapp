@@ -8,11 +8,6 @@ pipeline {
   agent none
      stages {
        stage('Docker Build') {
-         agent {
-	            docker {
-                    image 'docker:latest'                       
-	            }
-            }
 			  steps {
                      sh 'echo Hello World!'
                     }

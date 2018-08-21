@@ -8,7 +8,7 @@ pipeline {
   agent none
     stages {
           stage('Docker Build') {
-             agent none
+             agent { label 'agent1'}
 		     steps {
                  sh 'echo Hello World!'
                 }

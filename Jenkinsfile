@@ -6,13 +6,11 @@ def imageTag = "https://github.com/lordkress/${appName}:${env.BRANCH_NAME}.${env
 
 pipeline {
   agent none
-     node {
-          stages {
-              stage('Docker Build') {
-			      steps {
-                     sh 'echo Hello World!'
-                    }
-				}
-			}
+	
+	stages {
+         stage('Docker Build') {
+		    steps {
+              sh 'echo Hello World!'
+            }
         }
-    }
+	}			

@@ -9,7 +9,7 @@ pipeline {
      stages {
        stage('Docker Build') {
          agent {
-	            Docker {
+	            docker {
                    steps {
                       sh 'docker build -t ${appName} .'
                     }    

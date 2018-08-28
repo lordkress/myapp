@@ -10,7 +10,10 @@ podTemplate(label: label, containers: [
 {
 node(label) {
       stage ('Build image') {
-          sh("echo Hello World!")
-        }
+		      container('docker') {
+				  sh("docker build -t ${appName} .")
+                }
+            }
+        }  
     }
 }

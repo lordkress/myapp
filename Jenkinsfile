@@ -7,6 +7,11 @@ podTemplate(label: label, containers: [
     containerTemplate(name: 'kube', image: 'gcr.io/cloud-builders/kubectl:latest', ttyEnabled: true, command: 'cat')
   ]) 
 
+volumes: [ 
+    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'), 
+]
+ 
+
 {
     node(label) {
         stage ('Build image') {

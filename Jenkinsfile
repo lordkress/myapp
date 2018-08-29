@@ -1,5 +1,5 @@
 def label = "mypod-${UUID.randomUUID().toString()}"
-def appName = 'myapp'
+def appName = 'my-app'
 def imageTag = "https://github.com/lordkress/${appName}:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
 
 podTemplate(label: label, containers: [

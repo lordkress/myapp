@@ -6,8 +6,7 @@ podTemplate(label: label, containers: [
     containerTemplate(name: 'docker', image: 'gcr.io/cloud-builders/docker:latest', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'kube', image: 'gcr.io/cloud-builders/kubectl:latest', ttyEnabled: true, command: 'cat')
   ],
-  volumes: [ 
-    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'), 
+ volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
      ]
 ) 
 
@@ -15,7 +14,8 @@ podTemplate(label: label, containers: [
     node(label) {
         stage ('Build image') {
 		        container('docker') {
-				  sh("docker build -t lordkress/${appName}:latest .")
+				  #sh("docker build -t lordkress/${appName}:latest .")
+				  sh("docker version")
                 }
             }
         }  

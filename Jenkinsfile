@@ -7,7 +7,6 @@ podTemplate(label: label, containers: [
     containerTemplate(name: 'kube', image: 'gcr.io/cloud-builders/kubectl:latest', ttyEnabled: true, command: 'cat')
   ],
  volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
-     ]
 ) 
 
 {
